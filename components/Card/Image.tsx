@@ -5,7 +5,7 @@ type CardImageProps = {
   name: string;
   artist: string;
   frame: string;
-  flavor_text: string | null;
+  flavor_text?: string;
   class_name?: string;
   small?: boolean;
 };
@@ -26,6 +26,7 @@ export const CardImage = ({
       alt={`${name} - Artist: ${artist}`}
       width={small ? 146 : 336}
       height={small ? 204 : 469}
+      // priority={true}
       unoptimized
     />
   );

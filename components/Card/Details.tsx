@@ -1,35 +1,80 @@
-import { convertTextSymbols } from '../../utils/CardHelpers';
+import { FC } from 'react';
+import { CardCore, CardLegalities } from '../../types/CardHelper';
+import { convertText } from '../../utils/CardHelpers';
+import { CardLegality } from './Legality';
+import { CardCoreDetails } from './CoreDetails';
 
-type DetailsProps = {
+type CardDetailsProps = {
   name: string;
   mana_cost: string;
+  power?: string;
+  toughness?: string;
   type_line: string;
   oracle_text: string;
-  flavor_text: string;
+  flavor_text?: string;
   artist: string;
+  legalities: CardLegalities;
+  card_faces?: CardCore[];
+  multifaced: boolean;
 };
-export const Details = ({ name, mana_cost, type_line, oracle_text, flavor_text, artist }: DetailsProps) => {
-  const manaCostWithSymbols = convertTextSymbols(mana_cost);
-  const oracleTextWithSymbols = convertTextSymbols(oracle_text);
+export const CardDetails: FC<CardDetailsProps> = ({
+  name,
+  mana_cost,
+  power,
+  toughness,
+  type_line,
+  oracle_text,
+  flavor_text,
+  artist,
+  legalities,
+  card_faces,
+  multifaced
+}) => {
+  const cardFront = multifaced ? card_faces![0] : undefined;
+  const cardBack = multifaced ? card_faces![1] : undefined;
+
   return (
-    <div className='w-full whitespace-pre-line -ml-8 mt-8'>
-      <div className='pl-8 bg-white shadow-xl rounded border-y-4 border-y-slate-700 border-x-[1px] border-x-slate-200'>
-        <div className='border-b-[1px] border-b-slate-200'>
-          <h1 className='py-2 px-4'>{name} <span dangerouslySetInnerHTML={{__html: manaCostWithSymbols}}></span></h1>
-        </div>
-        <div className='border-b-[1px] border-b-slate-200'>
-          <h2 className='py-2 px-4'>{type_line}</h2>
-        </div>
-        <text
-          className='px-4 py-2 italic inline-block text-[14px]'
-          dangerouslySetInnerHTML={{ __html: oracleTextWithSymbols }}></text>
-        {flavor_text && <text className='py-2 px-4 text-sm inline-block italic'>{flavor_text}</text>}
-        <div className='border-y-[1px] border-y-slate-200'>
-          <text className='py-2 px-4 text-xs italic'>
+    <div className='w-96 whitespace-pre-line -ml-[28.5rem] mt-8'>
+      <div className='bg-white shadow-xl rounded border-y-4 border-y-slate-700 border-x-[1px] border-x-slate-200 min-h-[30rem]'>
+        {!multifaced ? (
+          <CardCoreDetails
+            name={name}
+            mana_cost={mana_cost}
+            type_line={type_line}
+            oracle_text={oracle_text}
+            flavor_text={flavor_text}
+            power={power}
+            toughness={toughness}
+          />
+        ) : (
+          <>
+            <CardCoreDetails
+              name={cardFront!.name}
+              mana_cost={cardFront!.mana_cost}
+              type_line={cardFront!.type_line}
+              oracle_text={cardFront!.oracle_text}
+              flavor_text={cardFront!.flavor_text}
+              power={cardFront!.power}
+              toughness={cardFront!.toughness}
+            />
+            <CardCoreDetails
+              name={cardBack!.name}
+              mana_cost={cardBack!.mana_cost}
+              type_line={cardBack!.type_line}
+              oracle_text={cardBack!.oracle_text}
+              flavor_text={cardBack!.flavor_text}
+              power={cardBack!.power}
+              toughness={cardBack!.toughness}
+            />
+          </>
+        )}
+        <div className='pl-8 border-y-[1px] border-y-slate-200'>
+          <text className='py-2 pr-4 text-xs italic'>
             <em>Illustrated by </em>
             {artist}
           </text>
         </div>
+        <CardLegality legalities={legalities} />
       </div>
     </div>
   );
