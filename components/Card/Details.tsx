@@ -34,7 +34,7 @@ export const CardDetails: FC<CardDetailsProps> = ({
   const cardBack = multifaced ? card_faces![1] : undefined;
 
   return (
-    <div className='w-96 whitespace-pre-line -ml-[28.5rem] mt-8'>
+    <div className='w-96 whitespace-pre-line -ml-4 mt-8'>
       <div className='bg-white shadow-xl rounded border-y-4 border-y-slate-700 border-x-[1px] border-x-slate-200 min-h-[30rem]'>
         {!multifaced ? (
           <CardCoreDetails

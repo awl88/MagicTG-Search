@@ -28,6 +28,7 @@ const CardPage: NextPage<CardPageProps> = ({
   }
 }) => {
   const isMultifacedCard = checkIfMultifacedCard(layout);
+
   const { small, normal, large, art_crop, png } = !isMultifacedCard ? image_uris! : card_faces[0].image_uris!;
 
   return (
@@ -43,13 +44,13 @@ const CardPage: NextPage<CardPageProps> = ({
       <article className='w-screen f-screen mx-auto mt-8 mb-2 max-w-3xl'>
         <section className='flex flex-col'>
           <div className='flex justify-center'>
-            <div className='w-full'>
+            <div className=''>
               <CardImage
                 src={png}
                 name={name}
                 artist={artist}
-                frame={frame}
-                flavor_text={flavor_text}
+                layout={layout}
+                alt_face={isMultifacedCard ? card_faces[1].image_uris!.png : ''}
                 class_name='drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] z-10'
               />
             </div>
