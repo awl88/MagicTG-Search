@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { CardLegal, CardLegalities, desiredLegalities } from '../../types/CardHelper';
+import { CardLegal, CardLegalities } from '../../types/CardHelper';
 import { filterLegalities } from '../../utils/CardHelpers';
-// import { filterLegalities } from '../../utils/CardHelpers';
 
 type CardLegalityProps = {
   legalities: CardLegalities;

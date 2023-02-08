@@ -5,6 +5,7 @@ import { loadCard } from '../api/cards/[id]';
 import Head from 'next/head';
 import { CardDetails } from '../../components/Card/Details';
 import { checkIfMultifacedCard } from '../../utils/CardHelpers';
+import { CardRulings } from '../../components/Card/rulings/Rulings';
 
 interface CardPageProps {
   card: Card;
@@ -24,7 +25,8 @@ const CardPage: NextPage<CardPageProps> = ({
     type_line,
     oracle_text,
     legalities,
-    card_faces
+    card_faces,
+    card_rulings
   }
 }) => {
   const isMultifacedCard = checkIfMultifacedCard(layout);
@@ -41,7 +43,7 @@ const CardPage: NextPage<CardPageProps> = ({
         <meta name='og:image' content={normal} />
         <meta name='og:url' content={``} />
       </Head>
-      <article className='w-screen f-screen mx-auto mt-8 mb-2 max-w-3xl'>
+      <article className='w-screen mx-auto'>
         <section className='flex flex-col'>
           <div className='flex justify-center'>
             <div className=''>
@@ -70,7 +72,10 @@ const CardPage: NextPage<CardPageProps> = ({
               />
             </div>
           </div>
-          <div></div>
+        </section>
+        <div className='border-b my-8 mx-12'></div>
+        <section className='mx-40 mb-8'>
+          <CardRulings name={name} rulings={card_rulings} />
         </section>
       </article>
     </>

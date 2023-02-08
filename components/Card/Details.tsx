@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { CardCore, CardLegalities } from '../../types/CardHelper';
-import { convertText } from '../../utils/CardHelpers';
 import { CardLegality } from './Legality';
 import { CardCoreDetails } from './CoreDetails';
 

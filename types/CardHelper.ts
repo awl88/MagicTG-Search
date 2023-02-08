@@ -16,6 +16,7 @@ export interface CardCore {
   flavor_text?: string;
   artist: string;
   image_uris?: ImageUris;
+  card_rulings: CardRuling[];
 
 }
 
@@ -90,3 +91,12 @@ export const desiredLegalities: string[] = [
   // "oldschool",
   // "premodern"
 ]
+
+export interface CardRuling {
+  published_at: string;
+  comment: string;
+}
+
+export interface CardRulingFetch {
+  data: CardRuling[]; 
+}
