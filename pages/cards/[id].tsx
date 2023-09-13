@@ -1,13 +1,13 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import { CardImage } from '../../components/Card/Image';
+import { CardImage } from '../../components/card/Image';
 import { Card, MultifaceCard } from '../../types/Card';
 import { loadCard } from '../api/cards/[id]';
 import Head from 'next/head';
-import { CardDetails } from '../../components/Card/Details';
+import { CardDetails } from '../../components/card/Details';
 import { checkIfMultifacedCard } from '../../utils/CardHelpers';
-import { CardRulings } from '../../components/Card/rulings/Rulings';
+import { CardRulings } from '../../components/card/rulings/Rulings';
 
-interface CardPageProps {
+type CardPageProps = {
   card: Card;
 }
 
@@ -85,10 +85,8 @@ const CardPage: NextPage<CardPageProps> = ({
 export default CardPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  console.log(params);
   const { id } = params!;
   const card: Card | MultifaceCard = await loadCard(id as string);
-  console.log(card);
   return {
     props: { card }
   };

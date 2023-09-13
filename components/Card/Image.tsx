@@ -16,7 +16,7 @@ const renderButton = (layout: CardLayout, handleClick: React.MouseEventHandler<H
   switch (layout) {
     case CardLayout.TRANSFORM:
       return (
-        <button onClick={handleClick} className='mt-4 py-2 px-4 rounded-md border-2'>
+        <button onClick={handleClick} className='mt-4 py-2 px-4 rounded border-2 bg-white drop-shadow'>
           Transform
         </button>
       );
@@ -37,7 +37,7 @@ export const CardImage: FC<CardImageProps> = ({ src, name, artist, class_name, l
       <div className={`relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] ${!cardFront && '[transform:rotateY(180deg)]'}`}>
         <div className='absolute inset-0'>
           <Image
-            className={'h-full w-full object-cover'}
+            className={'object-cover'}
             src={src}
             alt={`${name} - Artist: ${artist}`}
             width={small ? 146 : 336}

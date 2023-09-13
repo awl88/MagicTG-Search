@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { CardRuling } from '../../../types/CardHelper';
-import { CardRulingDetails } from './RulingDeetails';
+import { CardRulingDetails } from './RulingDetails';
 
 type CardRulingsProps = {
   name: string;

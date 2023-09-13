@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Card } from '../../../types/Card';
-import { CardRuling, CardRulingFetch } from '../../../types/CardHelper';
+import { CardRulingFetch } from '../../../types/CardHelper';
 
 export async function loadCard(id: string): Promise<Card> {
   const cardResponse: Card = await axios.get<Card>(`https://api.scryfall.com/cards/${id}`).then(res => res.data);
