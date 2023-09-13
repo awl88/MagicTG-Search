@@ -14,7 +14,6 @@ export const Search = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log('HERESEARCH',search)
     router.push(`/search/${search}`);
   };
 

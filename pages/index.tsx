@@ -16,7 +16,9 @@ export default function Home() {
       <main>
         <div className='w-full h-screen flex pt-64 bg-gradient-to-t from-[#0e161b] to-[#314d5e]'>
           <div className='flex mx-auto flex-col'>
-            <h1 className='text-4xl mx-auto my-10 text-slate-300 text-4xl drop-shadow'>Magic: The Gathering card search</h1>
+            <h1 className='text-4xl mx-auto my-10 text-slate-300 text-4xl drop-shadow'>
+              Magic: The Gathering card search
+            </h1>
             <Search />
           </div>
         </div>

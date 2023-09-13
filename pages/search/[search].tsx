@@ -4,13 +4,14 @@ import { Card, CardList } from '../../types/Card';
 import { searchCards } from '../api';
 import { CardImage } from '../../components/card/Image';
 import router from 'next/router';
+import Header from '../../components/Layout/Header';
 
 type CardSearchProps = {
   cardList: CardList;
 };
 
 const CardSearch: NextPage<CardSearchProps> = ({ cardList }) => {
-  const handleClick = async (id: string) => {
+  const handleClick = (id: string) => {
     router.push(`/cards/${id}`);
   };
 
@@ -22,7 +23,7 @@ const CardSearch: NextPage<CardSearchProps> = ({ cardList }) => {
           {cardList.data.map(card => (
             <div key={card.id} onClick={() => handleClick(card.id)} className='w-100px'>
               <CardImage
-                src={card.image_uris!.png}
+                src={card.card_faces ? card.card_faces[0].image_uris!.png : card.image_uris!.png}
                 artist={card.artist}
                 name={card.name}
                 layout={card.layout}

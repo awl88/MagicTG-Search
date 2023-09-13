@@ -6,10 +6,27 @@ import Head from 'next/head';
 import { CardDetails } from '../../components/card/Details';
 import { checkIfMultifacedCard } from '../../utils/CardHelpers';
 import { CardRulings } from '../../components/card/rulings/Rulings';
+import { CardLayout } from '../../types/CardHelper';
+import { useState } from 'react';
+import { CardDisplay } from '../../components/card/Display';
+import Header from '../../components/Layout/Header';
+
+const renderButton = (layout: CardLayout, handleClick: React.MouseEventHandler<HTMLButtonElement>) => {
+  switch (layout) {
+    case CardLayout.TRANSFORM:
+      return (
+        <button onClick={handleClick} className='mt-4 py-2 px-4 rounded border-2 bg-white drop-shadow'>
+          Transform
+        </button>
+      );
+    default:
+      return null;
+  }
+};
 
 type CardPageProps = {
   card: Card;
-}
+};
 
 const CardPage: NextPage<CardPageProps> = ({
   card: {
@@ -30,8 +47,13 @@ const CardPage: NextPage<CardPageProps> = ({
   }
 }) => {
   const isMultifacedCard = checkIfMultifacedCard(layout);
+  const [cardFront, setCardFront] = useState<boolean>(true);
 
-  const { small, normal, large, art_crop, png } = !isMultifacedCard ? image_uris! : card_faces[0].image_uris!;
+  const { normal, png } = !isMultifacedCard ? image_uris! : card_faces[0].image_uris!;
+
+  const handleClick = () => {
+    setCardFront(!cardFront);
+  };
 
   return (
     <>
@@ -44,17 +66,20 @@ const CardPage: NextPage<CardPageProps> = ({
         <meta name='og:url' content={``} />
       </Head>
       <article className='w-screen mx-auto'>
-        <section className='flex flex-col'>
+        {/* <Header /> */}
+        <section className='flex flex-col mt-8'>
           <div className='flex justify-center'>
             <div className=''>
-              <CardImage
+              <CardDisplay
                 src={png}
                 name={name}
                 artist={artist}
                 layout={layout}
                 alt_face={isMultifacedCard ? card_faces[1].image_uris!.png : ''}
+                card_front={cardFront}
                 class_name='drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] z-10'
               />
+              <div className='grid justify-items-center'>{renderButton(layout, handleClick)}</div>
             </div>
             <div className='w-fit'>
               <CardDetails
