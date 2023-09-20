@@ -67,11 +67,11 @@ export const CardDetails: FC<CardDetailsProps> = ({
             />
           </>
         )}
-        <div className='pl-8 border-y-[1px] border-y-slate-200'>
-          <text className='py-2 pr-4 text-xs italic'>
+        <div className='pl-8 border-b-[1px] border-y-slate-200'>
+          <span className='py-2 pr-4 text-xs italic'>
             <em>Illustrated by </em>
             {artist}
-          </text>
+          </span>
         </div>
         <CardLegality legalities={legalities} />
       </div>

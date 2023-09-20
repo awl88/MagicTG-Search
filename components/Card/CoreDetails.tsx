@@ -20,7 +20,7 @@ export const CardCoreDetails: FC<CardCoreDetailsProps> = ({
   oracle_text,
   flavor_text,
   power,
-  toughness,
+  toughness
 }) => {
   const manaCostWithSymbols = convertText(mana_cost);
   const oracleTextWithSymbols = convertText(oracle_text);
@@ -35,15 +35,15 @@ export const CardCoreDetails: FC<CardCoreDetailsProps> = ({
       <div className='pl-8 border-b-[1px] border-b-slate-200'>
         <h2 className='py-2 pr-4'>{type_line}</h2>
       </div>
-      <text
+      <span
         className='pl-8 pr-4 py-2 inline-block text-[14px]'
-        dangerouslySetInnerHTML={{ __html: oracleTextWithSymbols }}></text>
-      {flavor_text && <text className='pl-8  py-2 pr-4 text-sm inline-block italic'>{flavor_text}</text>}
+        dangerouslySetInnerHTML={{ __html: oracleTextWithSymbols }}></span>
+      {flavor_text && <span className='pl-8  py-2 pr-4 text-sm inline-block italic'>{flavor_text}</span>}
       {power && toughness && (
         <div className='pl-8 py-2 border-y-[1px] border-y-slate-200'>
-          <text className='pr-4 text-lg'>
+          <span className='pr-4 text-lg'>
             {power}/{toughness}
-          </text>
+          </span>
         </div>
       )}
     </>

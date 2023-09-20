@@ -39,16 +39,14 @@ export const CardDisplay: FC<CardDisplayProps> = ({
             layout={layout}
           />
         </div>
-        {layout === CardLayout.TRANSFORM && (
+        {layout === CardLayout.TRANSFORM && alt_face && (
           <div className='absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden]'>
-            <Image
-              className={class_name + ' rotate-y-180'}
-              src={alt_face!}
-              alt={`${name} - Artist: ${artist}`}
-              width={small ? 146 : 336}
-              height={small ? 204 : 469}
-              priority={true}
-              unoptimized
+            <CardImage
+              class_name={class_name + ' rotate-y-180'}
+              src={alt_face}
+              name={name}
+              artist={artist}
+              layout={layout}
             />
           </div>
         )}

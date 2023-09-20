@@ -1,5 +1,4 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import { CardImage } from '../../components/card/Image';
 import { Card, MultifaceCard } from '../../types/Card';
 import { loadCard } from '../api/cards/[id]';
 import Head from 'next/head';
@@ -9,7 +8,6 @@ import { CardRulings } from '../../components/card/rulings/Rulings';
 import { CardLayout } from '../../types/CardHelper';
 import { useState } from 'react';
 import { CardDisplay } from '../../components/card/Display';
-import Header from '../../components/Layout/Header';
 
 const renderButton = (layout: CardLayout, handleClick: React.MouseEventHandler<HTMLButtonElement>) => {
   switch (layout) {
@@ -66,7 +64,6 @@ const CardPage: NextPage<CardPageProps> = ({
         <meta name='og:url' content={``} />
       </Head>
       <article className='w-screen mx-auto'>
-        {/* <Header /> */}
         <section className='flex flex-col mt-8'>
           <div className='flex justify-center'>
             <div className=''>
@@ -77,7 +74,7 @@ const CardPage: NextPage<CardPageProps> = ({
                 layout={layout}
                 alt_face={isMultifacedCard ? card_faces[1].image_uris!.png : ''}
                 card_front={cardFront}
-                class_name='drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] z-10'
+                class_name='drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]'
               />
               <div className='grid justify-items-center'>{renderButton(layout, handleClick)}</div>
             </div>

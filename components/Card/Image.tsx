@@ -14,13 +14,14 @@ type CardImageProps = {
 
 export const CardImage: FC<CardImageProps> = ({ src, name, artist, class_name, small }) => {
   return (
-    <div>
+    <div className={`relative ${small ? 'h-[341px] w-[245px]' : 'h-[469px] w-[336px]'}`}>
       <Image
         className={class_name}
         src={src}
         alt={`${name} - Artist: ${artist}`}
-        width={small ? 245 : 336}
-        height={small ? 341 : 469}
+        fill
+        style={{ objectFit: 'cover' }}
+        sizes='(max-width: 336px) 100vw, 245px'
       />
     </div>
   );

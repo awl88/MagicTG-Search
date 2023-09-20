@@ -35,9 +35,9 @@ export const CardLegality: FC<CardLegalityProps> = ({ legalities }) => {
           <div key={i}>
             <p className='grid grid-cols-2'>
               <LegalCard legal={legalities[legality as keyof CardLegalities] as CardLegal} />
-              <text className='items-center text-xs mt-[1px] h-5'>
+              <span className='items-center text-xs mt-[1px] h-5'>
                 {legality.charAt(0).toUpperCase() + legality.slice(1)}
-              </text>
+              </span>
             </p>
           </div>
         );

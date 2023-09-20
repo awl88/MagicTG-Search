@@ -27,15 +27,16 @@ const Header: FC<HeaderProps> = ({}) => {
     <div className='w-full h-16 bg-gray-300'>
       <div className='flex justify-center'>
         <div className='w-1/2 h-16'>
-          <div className='ml-2 mt-2 text-xl flex flex-row'>
-            <Image
-              src={MagicLogo}
-              alt='Home'
-              width={48}
-              height={48}
-              className='mr-4 cursor-pointer'
-              onClick={handleClick}
-            />
+          <div className='ml-2 mt-2 text-xl flex flex-row '>
+            <div className='relative w-12 h-12 mr-4 cursor-pointer'>
+              <Image
+                src={MagicLogo}
+                alt='Home'
+                fill
+                sizes='(max-width: 640px) 100vw, 245px'
+                onClick={handleClick}
+              />
+            </div>
             <GrSearch className='mt-3 mr-2' size={24} />
             <form onSubmit={handleSubmit}>
               <input

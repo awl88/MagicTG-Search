@@ -1,23 +1,25 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
-import { Card, CardList } from '../../types/Card';
+import { CardList } from '../../types/Card';
 import { searchCards } from '../api';
 import { CardImage } from '../../components/card/Image';
-import router from 'next/router';
-import Header from '../../components/Layout/Header';
+import { useRouter } from 'next/router';
+import { SearchData } from '../../components/seach/search-data';
 
 type CardSearchProps = {
   cardList: CardList;
 };
 
 const CardSearch: NextPage<CardSearchProps> = ({ cardList }) => {
+  const router = useRouter();
+
   const handleClick = (id: string) => {
     router.push(`/cards/${id}`);
   };
 
   return (
     <div className='h-screen'>
-      <h1>Search Results</h1>
+      <SearchData numberOfCards={cardList.data.length}/>
       <section className='flex justify-center'>
         <div className='grid grid-cols-4 gap-2'>
           {cardList.data.map(card => (

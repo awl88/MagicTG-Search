@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { searchCards } from '../../pages/api';
-import { CardList } from '../../types/Card';
 
 export const Search = () => {
   const router = useRouter();
@@ -19,12 +17,16 @@ export const Search = () => {
 
   return (
     <div className=''>
-      <form className="flex flex-col justify-center" onSubmit={handleSubmit}>
+      <form className='flex flex-col justify-center' onSubmit={handleSubmit}>
         <input
           className='border border-black h-16 w-[32rem] bg-slate-600 text-5xl text-slate-100 px-2 rounded drop-shadow'
           type='text'
           onChange={e => handleChange(e)}></input>
-          <button className='bg-slate-600 text-slate-900 text-5xl h-16 w-60 mt-8 mx-auto rounded drop-shadow' type='submit'>Search</button>
+        <button
+          className='bg-slate-600 text-slate-900 text-5xl h-16 w-60 mt-8 mx-auto rounded drop-shadow'
+          type='submit'>
+          Search
+        </button>
       </form>
     </div>
   );
