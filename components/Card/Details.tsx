@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { CardCore, CardLegalities } from '../../types/CardHelper';
-import { CardLegality } from './Legality';
-import { CardCoreDetails } from './CoreDetails';
+import CardLegality from './Legality';
+import CardCoreDetails from './CoreDetails';
 
 type CardDetailsProps = {
   name: string;
@@ -16,7 +16,7 @@ type CardDetailsProps = {
   card_faces?: CardCore[];
   multifaced: boolean;
 };
-export const CardDetails: FC<CardDetailsProps> = ({
+const CardDetails: FC<CardDetailsProps> = ({
   name,
   mana_cost,
   power,
@@ -31,6 +31,8 @@ export const CardDetails: FC<CardDetailsProps> = ({
 }) => {
   const cardFront = multifaced ? card_faces![0] : undefined;
   const cardBack = multifaced ? card_faces![1] : undefined;
+
+  console.log(`card_faces: ${card_faces}`)
 
   return (
     <div className='w-96 whitespace-pre-line -ml-4 mt-8'>
@@ -78,3 +80,5 @@ export const CardDetails: FC<CardDetailsProps> = ({
     </div>
   );
 };
+
+export default CardDetails;

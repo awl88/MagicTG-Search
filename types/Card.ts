@@ -1,4 +1,4 @@
-import { CardCore, CardLayout, CardLegalities, ImageUris } from './CardHelper';
+import { CardCore, CardLayout, CardLegalities, CardObjectType, ImageUris } from './CardHelper';
 export interface Card extends CardCore {
   id: string;
   frame: string;
@@ -8,9 +8,11 @@ export interface Card extends CardCore {
 }
 
 export interface CardList {
+  object: CardObjectType;
   total_cards: number;
   has_more: boolean;
   next_page: string;
+  page: number;
   data: Card[];
 }
 

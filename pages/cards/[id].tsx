@@ -2,9 +2,9 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { Card, MultifaceCard } from '../../types/Card';
 import { loadCard } from '../api/cards/[id]';
 import Head from 'next/head';
-import { CardDetails } from '../../components/card/Details';
+import CardDetails from '../../components/card/Details';
 import { checkIfMultifacedCard } from '../../utils/CardHelpers';
-import { CardRulings } from '../../components/card/rulings/Rulings';
+import CardRulings from '../../components/card/rulings/Rulings';
 import { CardLayout } from '../../types/CardHelper';
 import { useState } from 'react';
 import { CardDisplay } from '../../components/card/Display';
@@ -45,9 +45,10 @@ const CardPage: NextPage<CardPageProps> = ({
   }
 }) => {
   const isMultifacedCard = checkIfMultifacedCard(layout);
+  const isTransformCard = layout === CardLayout.TRANSFORM;
   const [cardFront, setCardFront] = useState<boolean>(true);
 
-  const { normal, png } = !isMultifacedCard ? image_uris! : card_faces[0].image_uris!;
+  const { normal, png } = !isTransformCard ? image_uris! : card_faces[0].image_uris!;
 
   const handleClick = () => {
     setCardFront(!cardFront);
@@ -72,7 +73,7 @@ const CardPage: NextPage<CardPageProps> = ({
                 name={name}
                 artist={artist}
                 layout={layout}
-                alt_face={isMultifacedCard ? card_faces[1].image_uris!.png : ''}
+                alt_face={isTransformCard ? card_faces[1].image_uris!.png : ''}
                 card_front={cardFront}
                 class_name='drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]'
               />

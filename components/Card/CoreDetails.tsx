@@ -13,7 +13,7 @@ type CardCoreDetailsProps = {
   card_faces?: CardCore[];
 };
 
-export const CardCoreDetails: FC<CardCoreDetailsProps> = ({
+const CardCoreDetails: FC<CardCoreDetailsProps> = ({
   name,
   mana_cost,
   type_line,
@@ -49,3 +49,5 @@ export const CardCoreDetails: FC<CardCoreDetailsProps> = ({
     </>
   );
 };
+
+export default CardCoreDetails;

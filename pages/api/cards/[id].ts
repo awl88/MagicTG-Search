@@ -5,6 +5,8 @@ import { CardRulingFetch } from '../../../types/CardHelper';
 export async function loadCard(id: string): Promise<Card> {
   const cardResponse: Card = await axios.get<Card>(`https://api.scryfall.com/cards/${id}`).then(res => res.data);
 
+  console.log(cardResponse)
+
   cardResponse.card_rulings = await axios
     .get<CardRulingFetch>(`https://api.scryfall.com/cards/${id}/rulings`)
     .then(res => {

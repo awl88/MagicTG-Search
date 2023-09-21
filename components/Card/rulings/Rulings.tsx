@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { CardRuling } from '../../../types/CardHelper';
-import { CardRulingDetails } from './RulingDetails';
+import CardRulingDetails from './RulingDetails';
 
 type CardRulingsProps = {
   name: string;
@@ -37,3 +37,5 @@ export const CardRulings: FC<CardRulingsProps> = ({ name, rulings }) => {
     </>
   );
 };
+
+export default CardRulings;

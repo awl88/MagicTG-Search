@@ -5,11 +5,13 @@ type CardRulingDetailsProp = {
   ruling: CardRuling;
 };
 
-export const CardRulingDetails: FC<CardRulingDetailsProp> = ({ ruling }) => {
+const CardRulingDetails: FC<CardRulingDetailsProp> = ({ ruling }) => {
   return (
     <div className='flex flex-col text-sm p-2'>
-      <text>{ruling.comment}</text>
-      <text className='text-slate-600 italic'>{`(${ruling.published_at})`}</text>
+      <span>{ruling.comment}</span>
+      <span className='text-slate-600 italic'>{`(${ruling.published_at})`}</span>
     </div>
   );
 };
+
+export default CardRulingDetails;

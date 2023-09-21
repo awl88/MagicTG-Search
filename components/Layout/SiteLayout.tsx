@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Header from './Header';
+import Footer from './Footer';
 
 const SiteLayout = ({ children }: any) => (
-  <div>
+  <div className='flex flex-col'>
     <Header />
-    <div>{children}</div>
+    <div className='flex-grow'>{children}</div>
+    <Footer />
   </div>
 );
 

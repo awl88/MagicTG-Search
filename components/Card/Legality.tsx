@@ -25,7 +25,7 @@ const LegalCard: FC<LegalCardProps> = ({ legal }) => {
   );
 };
 
-export const CardLegality: FC<CardLegalityProps> = ({ legalities }) => {
+const CardLegality: FC<CardLegalityProps> = ({ legalities }) => {
   const filteredLegalities = filterLegalities(legalities);
 
   return (
@@ -45,3 +45,5 @@ export const CardLegality: FC<CardLegalityProps> = ({ legalities }) => {
     </div>
   );
 };
+
+export default CardLegality;

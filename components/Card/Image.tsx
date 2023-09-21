@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 import { CardLayout } from '../../types/CardHelper';
+import exp from 'constants';
 
 type CardImageProps = {
   src: string;
@@ -12,7 +13,7 @@ type CardImageProps = {
   alt_face?: string;
 };
 
-export const CardImage: FC<CardImageProps> = ({ src, name, artist, class_name, small }) => {
+const CardImage: FC<CardImageProps> = ({ src, name, artist, class_name, small }) => {
   return (
     <div className={`relative ${small ? 'h-[341px] w-[245px]' : 'h-[469px] w-[336px]'}`}>
       <Image
@@ -26,3 +27,5 @@ export const CardImage: FC<CardImageProps> = ({ src, name, artist, class_name, s
     </div>
   );
 };
+
+export default CardImage;

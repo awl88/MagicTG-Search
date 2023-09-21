@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 import { CardLayout } from '../../types/CardHelper';
-import { CardImage } from './Image';
+import CardImage from './Image';
 
 type CardDisplayProps = {
   src: string;
@@ -9,7 +9,6 @@ type CardDisplayProps = {
   artist: string;
   class_name?: string;
   layout: CardLayout;
-  small?: boolean;
   alt_face?: string;
   card_front?: boolean;
 };
@@ -20,7 +19,6 @@ export const CardDisplay: FC<CardDisplayProps> = ({
   artist,
   class_name,
   layout,
-  small,
   alt_face,
   card_front
 }) => {

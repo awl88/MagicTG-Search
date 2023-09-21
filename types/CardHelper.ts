@@ -1,8 +1,8 @@
 export interface ImageUris {
-  small: string;
-  normal: string;
-  large: string;
-  art_crop: string;
+  small?: string;
+  normal?: string;
+  large?: string;
+  art_crop?: string;
   png: string;
 }
 
@@ -99,4 +99,10 @@ export interface CardRuling {
 
 export interface CardRulingFetch {
   data: CardRuling[]; 
+}
+
+export enum CardObjectType {
+  CARD = "card",
+  LIST = "list",
+  SET = "set"
 }
