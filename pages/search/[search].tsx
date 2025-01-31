@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardList } from '../../types/Card';
 import { searchCards } from '../api';
 import CardImage from '../../components/card/Image';
@@ -17,19 +17,52 @@ const CardSearch: NextPage<CardSearchProps> = ({ cardList }) => {
 
   const router = useRouter();
   const [currentPage, setCurrentPage] = React.useState<number>(0);
-  const [cardListData, setCardListData] = React.useState<Card[]>(first60Cards);
+  const [cardListData, setCardListData] = React.useState<Card[]>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCardListData(first60Cards);
-  }, [cardList, currentPage]);
+  }, [cardList]);
+
+  useEffect(() => {
+    (async () => {
+      let more = cardList.has_more;
+      let nextPage = cardList.next_page;
+
+      while (more) {
+        const next = await searchCards(nextPage, 1);
+        cardList.data.push(...next.data);
+        more = next.has_more;
+        nextPage = next.next_page;
+      }
+    })();
+  }, [cardList]);
 
   const handleClick = (id: string) => {
     router.push(`/cards/${id}`);
   };
 
+  const handleNextPageClick = () => {
+    const nextPage = currentPage + 1;
+    setCurrentPage(nextPage);
+    setCardListData(cardList.data.slice(nextPage * 60, nextPage * 60 + 60));
+  };
+
+  const handlePreviousPageClick = () => {
+    const previousPage = currentPage - 1;
+    setCurrentPage(previousPage);
+    setCardListData(cardList.data.slice(previousPage * 60, previousPage * 60 + 60));
+    console.log(currentPage)  
+    console.log('previous page')
+  };
+
   return (
     <div>
-      <SearchData numberOfCards={cardList.total_cards} />
+      <SearchData
+        numberOfCards={cardList.total_cards}
+        page={currentPage}
+        handleNextPageClick={handleNextPageClick}
+        handlePreviousPageClick={handlePreviousPageClick}
+      />
       <section className='flex justify-center'>
         <div className='grid grid-cols-4 gap-2'>
           {cardListData.map(card => (
@@ -52,6 +85,7 @@ const CardSearch: NextPage<CardSearchProps> = ({ cardList }) => {
           ))}
         </div>
       </section>
+      <section className='flex justify-center mt-4'>nezt page</section>
     </div>
   );
 };
@@ -62,10 +96,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { search } = params!;
   const cardList: CardList = await searchCards(search as string, 0);
 
-  if (cardList.has_more) {
-    const nextPage = await searchCards(cardList.next_page, 1);
-    cardList.data.push(...nextPage.data);
-  }
   return {
     props: { cardList }
   };

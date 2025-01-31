@@ -2,9 +2,6 @@ import { CardList } from '../types/Card';
 import { CardLayout, CardLegal, CardLegalities, desiredLegalities } from '../types/CardHelper';
 
 export const convertText = (text: string): string => {
-
-
-  console.log(text);
   let symbolMatches = text.match(/{(\w*|∞)(\/(\w))?(\/(\w))?}/g);
 
   if (symbolMatches) {
@@ -55,7 +52,6 @@ export const minimizeCardListData = (cardList: CardList): any => {
   const cardListData = cardList.data.map(card => {
     const { id, name, image_uris, card_faces, layout } = card;
 
-    let imageUris;
     let cardfaces;
 
     const minimizeImageUris = (image_uris: any) => {
