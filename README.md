@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MagicTG Search
 
-## Getting Started
+A card search app for Magic: The Gathering, built with Next.js and TypeScript on top of the [Scryfall API](https://scryfall.com/docs/api). Search for cards, browse the results, and open a card to see its image, text, format legality and official rulings.
 
-First, run the development server:
+I built this to practice Next.js, server-side rendering, and working with a third-party API. It is a personal project.
+
+## Features
+
+- **Search** using Scryfall's search syntax. Whatever you type is passed to Scryfall, so queries like `t:dragon c:red` work as well as plain card names.
+- **Paged results**, 60 cards per page, with a count of how many cards matched. The app loads the remaining pages from Scryfall in the background so paging is quick.
+- **Card pages** with the card image, type, mana cost, rules text, power and toughness, flavor text and artist.
+- **Mana symbols in card text**, drawn from Scryfall's symbol images, and reminder text in italics.
+- **Format legality** shown as Legal or Not Legal for the main constructed formats.
+- **Rulings** for each card, sorted by date.
+- **Double-faced cards**: a Transform button flips the card with a CSS animation.
+
+## Tech stack
+
+- Next.js 13 (Pages Router) with server-side rendering
+- React 18 and TypeScript
+- Tailwind CSS
+- Axios for requests, `react-icons` for icons
+- ESLint
+
+## Running it locally
 
 ```bash
+git clone https://github.com/awl88/MagicTG-Search.git
+cd MagicTG-Search
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000. No API key is needed, since Scryfall's API is public.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## How it works
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- `pages/search/[search].tsx` fetches the first page of results on the server, then loads the rest in the browser.
+- `pages/cards/[id].tsx` fetches a single card and its rulings on the server.
+- `pages/api/` holds the functions that call Scryfall. `utils/CardHelpers.ts` converts card text, filters legalities and trims search results down to the fields the list needs.
+- `components/` is split into the search box, the card display, and layout.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## What I would improve
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Add tests. There are none yet.
+- Add search suggestions and filters instead of requiring Scryfall syntax.
+- Cache requests and handle Scryfall's rate limits and errors.
+- Render the card text without injecting HTML strings.
+- Fix a few leftovers: the `seach` folder name is misspelled, and some imports use different capitalization (`card` vs `Card`).
 
-## Learn More
+## Credits
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Card data and images come from [Scryfall](https://scryfall.com). This project is unofficial and is not affiliated with Scryfall or Wizards of the Coast. Magic: The Gathering is a trademark of Wizards of the Coast.
